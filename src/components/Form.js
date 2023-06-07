@@ -13,6 +13,12 @@ function handleChange(event){
 function handleSubmit(e){
   e.preventDefault()
   handleAddTask(formData)
+  setFormData({
+    taskName: "",
+    description: "",
+    dueDate: "",
+    priority: "",
+  });
 }
 
   return (
