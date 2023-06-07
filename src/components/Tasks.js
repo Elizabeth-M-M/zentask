@@ -1,9 +1,9 @@
 import React from 'react'
 import TaskCard from './TaskCard';
-import { allTasks } from '../assets/Data';
 
-function Tasks() {
- const tasks= allTasks
+
+function Tasks({tasks}) {
+ 
   return (
     <div className="p-5">
       <div className=" gap-4 md:flex">
