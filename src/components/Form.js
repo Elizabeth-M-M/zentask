@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Form() {
+function Form({handleAddTask}) {
+  const [formData, setFormData]= useState({
+    taskName:'',
+    description:'',
+    dueDate:'',
+    priority:''
+  })
+function handleChange(event){
+  setFormData({...formData, [event.target.name]:event.target.value})
+}
+function handleSubmit(e){
+  e.preventDefault()
+  handleAddTask(formData)
+}
+
   return (
-    <form class="w-full max-w-lg">
+    <form class="w-full max-w-lg" onSubmit={handleSubmit}>
       <div class="flex flex-wrap -mx-3 mb-6">
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label
@@ -15,6 +29,9 @@ function Form() {
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="task"
             type="text"
+            name="taskName"
+            value={formData.taskName}
+            onChange={handleChange}
           />
         </div>
         <div class="w-full md:w-1/2 px-3">
@@ -28,6 +45,9 @@ function Form() {
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="description"
             type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -44,6 +64,9 @@ function Form() {
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="dueDate"
             type="date"
+            name="dueDate"
+            value={formData.dueDate}
+            onChange={handleChange}
           />
         </div>
         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -57,7 +80,11 @@ function Form() {
             <select
               class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="priority"
+              name="priority"
+              value={formData.priority}
+              onChange={handleChange}
             >
+              <option>Select</option>
               <option>Critical</option>
               <option>Medium</option>
               <option>Minor</option>
@@ -74,7 +101,7 @@ function Form() {
           </div>
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-3 mx-auto"
-            type="button"
+            type="submit"
           >
             Add
           </button>
