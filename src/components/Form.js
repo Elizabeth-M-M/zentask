@@ -12,7 +12,16 @@ function handleChange(event){
 }
 function handleSubmit(e){
   e.preventDefault()
-  handleAddTask(formData)
+  fetch("http://localhost:3000/tasks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((res) => res.json())
+    .then((data) => handleAddTask(data));
+  
   setFormData({
     taskName: "",
     description: "",
